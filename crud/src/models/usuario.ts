@@ -4,7 +4,7 @@ export class Usuario {
     email: String | any;
     telefone : String | any;
     dataNascimento: String | any;
-    estadoCivil: String | any;;
+    estadoCivil: String | any;
     cep : String | any;
     rua : String | any;
     numero : String | any;

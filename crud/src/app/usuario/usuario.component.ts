@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from 'src/models/usuario';
+import { FormGroup, FormControl } from "@angular/forms";
 
 @Component({
   selector: 'app-usuario',
@@ -35,15 +36,32 @@ export class UsuarioComponent implements OnInit {
   { uf: 'SP', nome: 'São Paulo' },
   { uf: 'SE', nome: 'Sergipe' },
   { uf: 'TO', nome: 'Tocantins' }];
-
+  form : FormGroup | any;
   estadosCivis = ["solteiro(a)", "casado(a)", "viúvo(a)", "divorciado(a)", "separado(a)"];
   constructor() { }
 
   ngOnInit(): void {
-  }
+    this.mapearFormulario(new Usuario);
 
+  }
+ async mapearFormulario(user:Usuario){
+  this.form = new FormGroup({
+    nome : new FormControl(user.nome),
+    cpf : new FormControl(user.cpf),
+    email : new FormControl(user.email),
+    dataNascimento : new FormControl(user.dataNascimento),
+    telefone : new FormControl(user.telefone),
+    cep : new FormControl(user.cep),
+    rua : new FormControl(user.rua),
+    numero : new FormControl(user.numero),
+    bairro : new FormControl(user.bairro),
+    cidade : new FormControl(user.cidade),
+    estado : new FormControl(user.estado)
+  })
+  }
   recebeDados() {
-  console.log("qualquer coisa");
+    console.log(this.form.value.nome)
+
   }
 
 

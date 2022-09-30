@@ -9,24 +9,27 @@
 <body>
     <main>
         <h1>Formulário</h1>
-        <div class="container">
-            <input type="text" id="nome" name="nome" class="campo" placeholder="nome completo">
-            <input type="text" class="campo" id="cpf" placeholder="CPF" maxlength="11" required>
-            <input type="email"class="campo"  name="" id="email" placeholder="email">
-            <input type="date" class="campo" name="" id="data-nascimento" placeholder="data de nascimento">
-            <input type="tel" class="campo" name="" id="telefone" placeholder="telefone" maxlength="11" required>
-            <select name="estado-civil" id="" >
-                <option value="" *ngFor="let estadoCivil of estadosCivis">{{estadoCivil}}</option>
-            </select>
-            <input type="text" class="campo" id="cep" placeholder="CEP" maxlength="8">
-            <input type="text" class="campo" id="rua" placeholder="rua">
-            <input type="text" class="campo" id="bairro" placeholder="bairro">
-            <input type="text" class="campo" id="numero" placeholder="número">
-            <input type="text" class="campo" id="cidade" placeholder="cidade">
-            <select name="estado" id="estadosBrasileiros" class="campo" placeholder="estado">
-                <option value="estado.uf" *ngFor="let estado of estados" >{{estado.nome}}</option>
-            </select>
-        </div>
+        
+        <form action="#" [formGroup] = "form">
+            <div class="container">
+                <input type="text" formControlName="nome" name="nome" class="campo" placeholder="nome completo">
+                <input type="text" formControlName="cpf" class="campo" id="cpf" placeholder="CPF" maxlength="11" required>
+                <input type="email"class="campo"  name="" id="email" placeholder="email">
+                <input type="date" class="campo" name="" id="data-nascimento" placeholder="data de nascimento">
+                <input type="tel" class="campo" name="" id="telefone" placeholder="telefone" maxlength="11" required>
+                <select name="estado-civil" id="" >
+                    <option value="" *ngFor="let estadoCivil of estadosCivis">{{estadoCivil}}</option>
+                </select>
+                <input type="text" class="campo" id="cep" placeholder="CEP" maxlength="8" required>
+                <input type="text" class="campo" id="rua" placeholder="rua">
+                <input type="text" class="campo" id="bairro" placeholder="bairro">
+                <input type="text" class="campo" id="numero" placeholder="número">
+                <input type="text" class="campo" id="cidade" placeholder="cidade">
+                <select name="estado" id="estadosBrasileiros" class="campo" placeholder="estado">
+                    <option value="estado.uf" *ngFor="let estado of estados" >{{estado.nome}}</option>
+                </select>
+            </div>
+        </form>
         <input type="submit" class="campo" id="submit" value="Enviar" (click) = "recebeDados()">
     </main>
 </body>
