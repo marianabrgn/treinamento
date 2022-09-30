@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD</title>
+</head>
+<body>
+    <main>
+        <h1>Formulário</h1>
+        <div class="container">
+            <input type="text" id="nome" name="nome" class="campo" placeholder="nome completo">
+            <input type="text" class="campo" id="cpf" placeholder="CPF" maxlength="11" required>
+            <input type="email"class="campo"  name="" id="email" placeholder="email">
+            <input type="date" class="campo" name="" id="data-nascimento" placeholder="data de nascimento">
+            <input type="tel" class="campo" name="" id="telefone" placeholder="telefone" maxlength="11" required>
+            <select name="estado-civil" id="" >
+                <option value="" *ngFor="let estadoCivil of estadosCivis">{{estadoCivil}}</option>
+            </select>
+            <input type="text" class="campo" id="cep" placeholder="CEP" maxlength="8">
+            <input type="text" class="campo" id="rua" placeholder="rua">
+            <input type="text" class="campo" id="bairro" placeholder="bairro">
+            <input type="text" class="campo" id="numero" placeholder="número">
+            <input type="text" class="campo" id="cidade" placeholder="cidade">
+            <select name="estado" id="estadosBrasileiros" class="campo" placeholder="estado">
+                <option value="estado.uf" *ngFor="let estado of estados" >{{estado.nome}}</option>
+            </select>
+        </div>
+        <input type="submit" class="campo" id="submit" value="Enviar" (click) = "recebeDados()">
+    </main>
+</body>
+</html>
