@@ -9,16 +9,16 @@ h1 {
     margin-bottom: 30px;
 }
 
-/* .grid-container {
+.grid-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-column-gap: 20px;
     background-color: rgb(251, 247, 242);
-} */
+}
 
 
 main {
-    background-color: rgb(251, 247, 242);
+    background-color: rgb(247, 225, 199);
     width: 50%;
     margin: 10px auto;
     display: flex;

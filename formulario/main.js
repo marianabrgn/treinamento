@@ -78,13 +78,16 @@ document.getElementById("telefone").addEventListener('blur', () => {
 
 function trataDados(dadosFormularios) {
     let erro = false;
+    let contagemErro = 0;
     Object.keys(dadosFormularios).forEach(key => {
         if(dadosFormularios[key] === ""){
             erro = true;
         }
+    ++contagemErro;
+        console.log(contagemErro);
     })
+    const mensagemErroContainer = document.createElement('button');
     if(erro){
-        const mensagemErroContainer = document.createElement('button');
         const mensagemErro = document.createElement('p');
         mensagemErro.innerHTML = `Erro. Algum campo vazio.`;
 
@@ -93,6 +96,11 @@ function trataDados(dadosFormularios) {
 
         mensagemErroContainer.classList.toggle("mensagem-erro");
         mensagemErroContainer.addEventListener("click", () => mensagemErroContainer.remove());
+    } else {
+        mensagemErroContainer.remove();
+        Object.keys(dadosFormularios).forEach(key => {
+            console.log(dadosFormularios[key]);
+        });
     }
 }
 
