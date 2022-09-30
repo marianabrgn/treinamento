@@ -48,6 +48,7 @@ export class UsuarioComponent implements OnInit {
   this.form = new FormGroup({
     nome : new FormControl(user.nome),
     cpf : new FormControl(user.cpf),
+    estadoCivil : new FormControl(user.estadoCivil),
     email : new FormControl(user.email),
     dataNascimento : new FormControl(user.dataNascimento),
     telefone : new FormControl(user.telefone),
