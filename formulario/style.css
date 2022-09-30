@@ -1,0 +1,79 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* .grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 20px;
+    background-color: rgb(251, 247, 242);
+} */
+
+
+main {
+    background-color: rgb(251, 247, 242);
+    width: 50%;
+    margin: 10px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px;
+}
+
+.campo {
+    margin: 7px 100px;
+    width: 50%;
+    padding: 5px;
+}
+
+select, #data-nascimento {
+    color: gray;
+}
+
+#submit{
+    width: 20%;
+    cursor: pointer;
+}
+
+#submit:hover {
+    background-color: rgb(226, 239, 251);
+    border: none;
+}
+
+.mensagem-erro {
+    border: solid red;
+    border-radius: 5px;
+    padding: 5px;
+    color: red;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.mensagem-erro:hover{
+    background-color: bisque;
+}
+
+@media (max-width: 1024px) {
+    .campo {
+        width: 70%;
+    }
+    main{
+        width: 70%;
+    }
+}
+
+@media (max-width: 750px) {
+    .campo {
+        width: 90%;
+    }
+    main{
+        width: 90%;
+    }
+}
