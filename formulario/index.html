@@ -10,21 +10,71 @@
 <body>
 
     <main id="container">
-        <h1>Formulário</h1>
-        <div class="grid-container">
-            <input type="text" id="nome" name="nome" class="campo" placeholder="apenas letras">
-            <input type="text" class="campo" id="cpf" placeholder="CPF" maxlength="11">
-            <input type="email"class="campo"  name="" id="email" placeholder="email">
-            <input type="date" class="campo" name="" id="data-nascimento" placeholder="data de nascimento">
-            <input type="tel" class="campo" name="" id="telefone" placeholder="telefone" maxlength="11">
-            <input type="text" class="campo" id="cep" placeholder="CEP" maxlength="8">
-            <input type="text" class="campo" id="rua" placeholder="rua">
-            <input type="text" class="campo" id="numero" placeholder="número">
-            <input type="text" class="campo" id="bairro" placeholder="bairro">
-            <input type="text" class="campo" id="cidade" placeholder="cidade">
-            <select name="estado" id="estados" class="campo" placeholder="estado">
-                <option value="">estado</option>
-            </select>
+        <h1>Cadastro de Usuário</h1>
+        <div class="form-container">
+            <div class="form-item">
+                <label for="nome">Nome</label>
+                <input type="text" id="nome" name="nome" class="campo">
+            </div>
+
+            <div class="form-item">
+                <label for="cpf">CPF</label>
+                <input type="text" class="campo" id="cpf" maxlength="11">
+            </div>
+
+            <div class="form-item">
+                <label for="estado-civil">Estado Civil</label>
+                <select name="estado-civil" id="estado-civil" class="campo">
+                    <option value=""></option>
+                </select>
+            </div>
+
+            <div class="form-item">
+                <label for="email">Email</label>
+                <input type="email"class="campo"  name="email" id="email" placeholder="exemplo@exemplo.com">
+            </div>
+
+            <div class="form-item">
+                <label for="data-nascimento">Data de nascimento</label>
+                <input type="date" class="campo" name="data-nascimento" id="data-nascimento" placeholder="data de nascimento">
+            </div>
+
+            <div class="form-item">
+                <label for="telefone">Telefone</label>
+                <input type="tel" class="campo" name="telefone" id="telefone" maxlength="11">
+            </div>
+
+            <div class="form-item">
+                <label for="cep">CEP</label>
+                <input type="text" class="campo" id="cep" name="cep" maxlength="8">
+            </div>
+
+            <div class="form-item">
+                <label for="rua">Rua</label>
+                <input type="text" class="campo" name="rua" id="rua" name="rua">
+            </div>
+
+            <div class="form-item">
+                <label for="numero">Número</label>
+                <input type="text" class="campo" name="numero" id="numero">
+            </div>
+
+            <div class="form-item">
+                <label for="bairro">Bairro</label>
+                <input type="text" class="campo" name="bairro" id="bairro">
+            </div>
+
+            <div class="form-item">
+                <label for="cidade">Cidade</label>
+                <input type="text" class="campo" id="cidade">
+            </div>
+
+            <div class="form-item">
+                <label for="estado">Estado</label>
+                <select name="estado" id="estados" class="campo">
+                    <option value=""></option>
+                </select>
+            </div>
             
         </div>
         <input type="submit" class="campo" id="submit" value="Enviar">
