@@ -5,6 +5,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UsuarioComponent } from './usuario/usuario.component';
+import { ConfigService } from 'src/services/cep.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -12,10 +14,13 @@ import { UsuarioComponent } from './usuario/usuario.component';
     UsuarioComponent
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule, FormsModule, ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    ConfigService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

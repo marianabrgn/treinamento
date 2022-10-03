@@ -17,16 +17,16 @@
                 <input type="email" formControlName="email" class="campo"  name="" id="email" placeholder="email">
                 <input type="date" formControlName="dataNascimento" class="campo" name="" id="data-nascimento" placeholder="data de nascimento">
                 <input type="tel" formControlName="telefone" class="campo" name="" id="telefone" placeholder="telefone" maxlength="11" required>
-                <select name="estado-civil" id="" >
-                    <option formControlName="estadoCivil" value="" *ngFor="let estadoCivil of estadosCivis">{{estadoCivil}}</option>
+                <select formControlName="estadoCivil" name="estado-civil" id="" >
+                    <option  *ngFor="let estadoCivil of estadosCivis">{{estadoCivil}}</option>
                 </select>
-                <input type="text" formControlName="cep" class="campo" id="cep" placeholder="CEP" maxlength="8" required>
+                <input type="text" formControlName="cep" (blur)="preencherEndereco()" class="campo" id="cep" placeholder="CEP" maxlength="8" required>
                 <input type="text" formControlName="rua" class="campo" id="rua" placeholder="rua">
                 <input type="text" formControlName="bairro" class="campo" id="bairro" placeholder="bairro">
                 <input type="text" class="campo" formControlName="numero" id="numero" placeholder="número">
                 <input type="text" formControlName="cidade" class="campo" id="cidade" placeholder="cidade">
-                <select name="estado" id="estadosBrasileiros" class="campo" placeholder="estado">
-                    <option formControlName="estado" value="estado.uf" *ngFor="let estado of estados" >{{estado.nome}}</option>
+                <select name="estado" formControlName="estado" id="estadosBrasileiros" class="campo" placeholder="estado">
+                    <option  *ngFor="let estado of estados" [value]="estado.uf">{{estado.nome}}</option>
                 </select>
             </div>
         </form>

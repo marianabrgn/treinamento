@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from 'src/models/usuario';
 import { FormGroup, FormControl } from "@angular/forms";
+import { ConfigService } from 'src/services/cep.service';
+import { Endereco } from 'src/models/endereco.module';
 
 @Component({
   selector: 'app-usuario',
@@ -36,15 +38,18 @@ export class UsuarioComponent implements OnInit {
   { uf: 'SP', nome: 'São Paulo' },
   { uf: 'SE', nome: 'Sergipe' },
   { uf: 'TO', nome: 'Tocantins' }];
+
   form : FormGroup | any;
   estadosCivis = ["solteiro(a)", "casado(a)", "viúvo(a)", "divorciado(a)", "separado(a)"];
-  constructor() { }
+  constructor(
+    public cep : ConfigService
+  ) { }
 
   ngOnInit(): void {
-    this.mapearFormulario(new Usuario);
+    this.mapearFormulario(new Usuario, new Endereco);
 
   }
- async mapearFormulario(user:Usuario){
+ async mapearFormulario(user : Usuario, endereco : Endereco){
   this.form = new FormGroup({
     nome : new FormControl(user.nome),
     cpf : new FormControl(user.cpf),
@@ -53,21 +58,28 @@ export class UsuarioComponent implements OnInit {
     dataNascimento : new FormControl(user.dataNascimento),
     telefone : new FormControl(user.telefone),
     cep : new FormControl(user.cep),
-    rua : new FormControl(user.rua),
-    numero : new FormControl(user.numero),
-    bairro : new FormControl(user.bairro),
-    cidade : new FormControl(user.cidade),
-    estado : new FormControl(user.estado)
+    numero :  new FormControl(user.numero),
+    rua : new FormControl(endereco.logradouro),
+    bairro : new FormControl(endereco.bairro),
+    cidade : new FormControl(endereco.localidade),
+    estado : new FormControl(endereco.uf)
   })
   }
-  recebeDados() {
-    console.log(this.form.value.nome)
 
+  preencherEndereco(){
+    this.cep.listarDadosEndereco(this.form.value.cep).subscribe( response => { 
+      console.log(response);
+      this.mapearFormulario(this.form.value , response);
+    })
   }
 
+  recebeDados() {
+    console.log(this.form.value);
+  }
 
-    
-
+  construirTabela(){
+    //containerTabela
+  }
 
 }
 
