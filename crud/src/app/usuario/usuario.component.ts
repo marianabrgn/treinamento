@@ -92,7 +92,6 @@ export class UsuarioComponent implements OnInit {
     tabelaContainer.classList.add('tabela-container');
     tabela.classList.add('tabela');
     linha.classList.add('linha');
-    tabelaContainer.classList.add('tabela-container');
 
     coluna.innerHTML = `${this.form.value.nome}`;
     coluna1.innerHTML = `${this.form.value.email}`;
