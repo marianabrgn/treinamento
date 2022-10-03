@@ -69,16 +69,45 @@ export class UsuarioComponent implements OnInit {
   preencherEndereco(){
     this.cep.listarDadosEndereco(this.form.value.cep).subscribe( response => { 
       console.log(response);
-      this.mapearFormulario(this.form.value , response);
+      this.mapearFormulario(this.form.value, response);
     })
   }
 
   recebeDados() {
     console.log(this.form.value);
+    this.construirTabela();
   }
 
   construirTabela(){
-    //containerTabela
+    const main = document.querySelector(".main");
+    const tabelaContainer = document.createElement('div');
+    const tabela = document.createElement('table');
+    const linha = document.createElement('tr');
+    const linha1 = document.createElement('tr');
+    const coluna = document.createElement('td');
+    const coluna1 = document.createElement('td');
+    const coluna2 = document.createElement('td');
+    const coluna3 = document.createElement('td');
+
+    tabelaContainer.classList.add('tabela-container');
+    tabela.classList.add('tabela');
+    linha.classList.add('linha');
+    tabelaContainer.classList.add('tabela-container');
+
+    coluna.innerHTML = `${this.form.value.nome}`;
+    coluna1.innerHTML = `${this.form.value.email}`;
+    coluna2.innerHTML = `${this.form.value.cpf}`;
+    coluna3.innerHTML = `${this.form.value.cep}`;
+
+    main?.appendChild(tabelaContainer);
+    tabelaContainer?.appendChild(tabela);
+    tabela?.appendChild(linha);
+    linha?.appendChild(coluna);
+    linha?.appendChild(coluna1);
+    tabela?.appendChild(linha1);
+    linha1?.appendChild(coluna2);
+    linha1?.appendChild(coluna3);
+
   }
 
 }
