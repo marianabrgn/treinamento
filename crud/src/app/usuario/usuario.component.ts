@@ -3,6 +3,7 @@ import { Usuario } from 'src/models/usuario';
 import { FormGroup, FormControl } from "@angular/forms";
 import { ConfigService } from 'src/services/cep.service';
 import { Endereco } from 'src/models/endereco.module';
+import { ApiService } from 'src/services/api.service';
 
 @Component({
   selector: 'app-usuario',
@@ -42,7 +43,8 @@ export class UsuarioComponent implements OnInit {
   form : FormGroup | any;
   estadosCivis = ["solteiro(a)", "casado(a)", "viúvo(a)", "divorciado(a)", "separado(a)"];
   constructor(
-    public cep : ConfigService
+    public cep : ConfigService,
+    public api : ApiService
   ) { }
 
   ngOnInit(): void {
@@ -75,6 +77,9 @@ export class UsuarioComponent implements OnInit {
 
   recebeDados() {
     console.log(this.form.value);
+    this.api.getAll().subscribe(response => {
+      console.log(response);
+    })
     this.construirTabela();
   }
 

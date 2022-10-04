@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Usuario } from 'src/models/usuario';
+import { Observable } from 'rxjs';
 import { Endereco } from 'src/models/endereco.module';
 
 
