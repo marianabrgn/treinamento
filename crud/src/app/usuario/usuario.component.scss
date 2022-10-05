@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: sans-serif;
 }
 
 main {
@@ -27,7 +28,9 @@ main {
         padding: 5px;
         color: grey;
         border-radius: 7px;
-        border: solid 1px gray;
+        border: solid 1px rgb(161, 142, 142);
+        outline: none;
+        
     }
 
     select {
@@ -38,7 +41,7 @@ main {
 #submit {
     margin: 5px;
     padding: 5px;
-    background-color: rgb(173, 250, 246);
+    background-color: rgb(102, 240, 198);
     border-radius: 5px;
     border: solid 1px gray;
     cursor: pointer;
@@ -52,21 +55,28 @@ main {
     background-color: rgb(165, 230, 224);
 }
 
-// .tabela-container {
-//     margin-top: 50px;
-//     background: rgb(114, 105, 105);
-//     width: 100%;
-//     height: 10vh;
-//     
-// }
+.tabela-container {
+    margin-top: 50px;
+    background: rgb(114, 105, 105);
+    width: 100%;
+    height: 10vh;    
+}
 
-// .tabela {
-//     width: 100%;
-//     height: 5vh;
-//     background-color: #fff;
-//     border: solid 1px black;
 
-// }
+.tabela {
+    width: 100%;
+    height: 5vh;
+    background-color: #fff;
+    border: solid 1px black;
+}
+
+td {
+    border: solid 1px black;
+}
+
+.botao {
+    padding: 50px;
+}
 
 @media(max-width: 660px) {
     main {

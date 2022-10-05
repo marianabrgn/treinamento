@@ -1,17 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { Usuario } from 'src/models/usuario';
 import { FormGroup, FormControl } from "@angular/forms";
 import { ConfigService } from 'src/services/cep.service';
 import { Endereco } from 'src/models/endereco.module';
 import { ApiService } from 'src/services/api.service';
 
+
 @Component({
   selector: 'app-usuario',
   templateUrl: './usuario.component.html',
   styleUrls: ['./usuario.component.scss']
 })
+
 export class UsuarioComponent implements OnInit {
   
+  tabelaDinamicaCriada : boolean = false;
   estados = [  { uf: 'AC', nome: 'Acre' },
   { uf: 'AL', nome: 'Alagoas' },
   { uf: 'AP', nome: 'Amapá' },
@@ -49,9 +52,9 @@ export class UsuarioComponent implements OnInit {
 
   ngOnInit(): void {
     this.mapearFormulario(new Usuario, new Endereco);
-
   }
- async mapearFormulario(user : Usuario, endereco : Endereco){
+
+  async mapearFormulario(user : Usuario, endereco : Endereco){
   this.form = new FormGroup({
     nome : new FormControl(user.nome),
     cpf : new FormControl(user.cpf),
@@ -76,43 +79,65 @@ export class UsuarioComponent implements OnInit {
   }
 
   recebeDados() {
-    console.log(this.form.value);
-    this.api.getAll().subscribe(response => {
-      console.log(response);
-    })
+    //console.log(this.form.value);
     this.construirTabela();
+    this.api.post(this.form.value).subscribe(response => {
+      console.log(response);
+    });
   }
 
   construirTabela(){
-    const main = document.querySelector(".main");
-    const tabelaContainer = document.createElement('div');
-    const tabela = document.createElement('table');
-    const linha = document.createElement('tr');
-    const linha1 = document.createElement('tr');
-    const coluna = document.createElement('td');
-    const coluna1 = document.createElement('td');
-    const coluna2 = document.createElement('td');
-    const coluna3 = document.createElement('td');
+    if(!this.tabelaDinamicaCriada){
+      const main = document.querySelector(".main");
+      const tabelaContainer = document.createElement('div');
+      const tabela = document.createElement('table');
+      const linha = document.createElement('tr');
+      const linha1 = document.createElement('tr');
+      const coluna = document.createElement('td');
+      const coluna1 = document.createElement('td');
+      const coluna2 = document.createElement('td');
+      const coluna3 = document.createElement('td');
+      const botaoVisualizar = document.createElement('button');
+      const botaoDelete = document.createElement('button');
+      
+      tabelaContainer.classList.add("tabela-container");
+      tabela.classList.add('tabela');
+      linha.classList.add('linha');
+      botaoVisualizar.classList.add("botao");
+      botaoDelete.classList.add("botao");
+      coluna.innerHTML = `${this.form.value.nome}`;
+      coluna1.innerHTML = `${this.form.value.email}`;
+      coluna2.innerHTML = `${this.form.value.cpf}`;
+      coluna3.innerHTML = `${this.form.value.cep}`;
+      botaoVisualizar.textContent = `Visualizar`;
+      botaoDelete.textContent = `Deletar`;
 
-    tabelaContainer.classList.add('tabela-container');
-    tabela.classList.add('tabela');
-    linha.classList.add('linha');
+      main?.appendChild(tabelaContainer);
+      tabelaContainer?.appendChild(tabela);
+      tabela?.appendChild(linha);
+      linha?.appendChild(coluna);
+      linha?.appendChild(coluna1);
+      tabela?.appendChild(linha1);
+      linha1?.appendChild(coluna2);
+      linha1?.appendChild(coluna3);
+      tabelaContainer?.appendChild(botaoVisualizar);
+      tabelaContainer?.appendChild(botaoDelete);
 
-    coluna.innerHTML = `${this.form.value.nome}`;
-    coluna1.innerHTML = `${this.form.value.email}`;
-    coluna2.innerHTML = `${this.form.value.cpf}`;
-    coluna3.innerHTML = `${this.form.value.cep}`;
-
-    main?.appendChild(tabelaContainer);
-    tabelaContainer?.appendChild(tabela);
-    tabela?.appendChild(linha);
-    linha?.appendChild(coluna);
-    linha?.appendChild(coluna1);
-    tabela?.appendChild(linha1);
-    linha1?.appendChild(coluna2);
-    linha1?.appendChild(coluna3);
+      botaoVisualizar?.addEventListener('click', this.visualizarDadosCadastrados);
+      botaoDelete?.addEventListener('click', this.deletarDadosCadastrados);
+      this.tabelaDinamicaCriada = true;
+    }
 
   }
+
+  visualizarDadosCadastrados() {
+    console.log("Visualizar dados cadastrados.");
+  }
+
+  deletarDadosCadastrados() {
+    console.log("Deletar dados Cadastrados.");
+  }
+
 
 }
 

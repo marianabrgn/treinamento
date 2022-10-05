@@ -1,7 +1,6 @@
 
     <main class="main">
         <h1>Formulário</h1>
-        
         <form action="#" [formGroup] = "form">
             <div class="container">
                 <input type="text" formControlName="nome" name="nome" class="campo" placeholder="nome completo">
@@ -21,7 +20,6 @@
                     <option  *ngFor="let estado of estados" [value]="estado.uf">{{estado.nome}}</option>
                 </select>
             </div>
-            
         </form>
         <input type="submit" class="campo" id="submit" value="Enviar" (click) = "recebeDados()">
 
