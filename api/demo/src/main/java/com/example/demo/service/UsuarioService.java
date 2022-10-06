@@ -14,4 +14,10 @@ public class UsuarioService {
     public String salvarDados(UsuarioDados data){
         return usuarioRepository.salvarDados(data);
     }
+
+    public String deletarDados(String data) {
+        return usuarioRepository.deletarDados(data);
+    }
+
+
 }

@@ -13,19 +13,17 @@ import com.example.demo.model.UsuarioDados;
 public class UsuarioRepository {
 
     public List<UsuarioDados> usuarioDados = new ArrayList <UsuarioDados>();
-    
 
     public String salvarDados(UsuarioDados data){
-        System.out.println(data.getNome());
+        // System.out.println(data.getNome());
         usuarioDados.add(data);
-        System.out.println(usuarioDados);
-
-        //UsuarioDados dados = data;
-        return "ok";
+        return "Success";
     }
 
+    public String deletarDados(String data) {
+        System.out.println(data);
+        return "Data deleted";
+    }
+
+
 }
-
-// public interface UsuarioRepository extends JpaRepository <UsuarioDados, Long> {
-
-// }
