@@ -1,27 +1,76 @@
-
     <main class="main">
         <h1>Formulário</h1>
-        <form action="#" [formGroup] = "form">
+        <form ngNativeValidate [formGroup] = "form">
             <div class="container">
                 <input type="text" formControlName="nome" name="nome" class="campo" placeholder="nome completo">
                 <input type="text" formControlName="cpf" class="campo" id="cpf" placeholder="CPF" maxlength="11" required>
                 <input type="email" formControlName="email" class="campo"  name="" id="email" placeholder="email">
                 <input type="date" formControlName="dataNascimento" class="campo" name="" id="data-nascimento" placeholder="data de nascimento">
-                <input type="tel" formControlName="telefone" class="campo" name="" id="telefone" placeholder="telefone" maxlength="11" required>
+                <input type="tel" formControlName="telefone" class="campo" name="" id="telefone" placeholder="telefone" maxlength="11">
                 <select formControlName="estadoCivil" name="estado-civil" id="" >
                     <option  *ngFor="let estadoCivil of estadosCivis">{{estadoCivil}}</option>
                 </select>
-                <input type="text" formControlName="cep" (blur)="preencherEndereco()" class="campo" id="cep" placeholder="CEP" maxlength="8" required>
+                <input type="text" formControlName="cep" (blur)="preencherEndereco('mapearFormulario')" class="campo" id="cep" placeholder="CEP" maxlength="8">
                 <input type="text" formControlName="rua" class="campo" id="rua" placeholder="rua">
                 <input type="text" formControlName="bairro" class="campo" id="bairro" placeholder="bairro">
                 <input type="text" class="campo" formControlName="numero" id="numero" placeholder="número">
                 <input type="text" formControlName="cidade" class="campo" id="cidade" placeholder="cidade">
                 <select name="estado" formControlName="estado" id="estadosBrasileiros" class="campo" placeholder="estado">
-                    <option  *ngFor="let estado of estados" [value]="estado.uf">{{estado.nome}}</option>
+                    <option *ngFor="let estado of estados" [value]="estado.uf">{{estado.nome}}</option>
                 </select>
             </div>
         </form>
         <input type="submit" class="campo" id="submit" value="Enviar" (click) = "recebeDados()">
+
+        <div *ngIf="tabela.length!=0" tabela-container-oficial>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>CPF</th>
+                        <th>email</th>
+                        <th>CEP</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let i of tabela">
+                        <td >{{i.nome}}</td>
+                        <td>{{i.cpf}}</td>
+                        <td>{{i.email}}</td>
+                        <td>{{i.cep}}</td>
+                        <button id="botao-atualizar" (click) = "atualizarDadosCadastrados('atualizartest')">Atualizar</button>
+                        <button id="botao-delete" (click) = "deletarDadosCadastrados('deletartest')">Deletar</button>
+                    </tr>
+                </tbody>
+
+            </table>
+            
+        </div>
+
+        <div *ngIf="mostrarModal">
+            <div class="modal-container">
+                <div class="container">
+                    <form ngNativeValidate [formGroup] = "formModal">
+                            <input type="text" formControlName="nome" name="nome" class="campo" placeholder="nome completo">
+                            <input type="text" formControlName="cpf" class="campo" id="cpf" placeholder="CPF" maxlength="11" required>
+                            <input type="email" formControlName="email" class="campo"  name="" id="email" placeholder="email">
+                            <input type="date" formControlName="dataNascimento" class="campo" name="" id="data-nascimento" placeholder="data de nascimento">
+                            <input type="tel" formControlName="telefone" class="campo" name="" id="telefone" placeholder="telefone" maxlength="11">
+                            <select formControlName="estadoCivil" name="estado-civil" id="" >
+                                <option  *ngFor="let estadoCivil of estadosCivis">{{estadoCivil}}</option>
+                            </select>
+                            <input type="text" formControlName="cep" (blur)="preencherEndereco('mapearFormulario')" class="campo" id="cep" placeholder="CEP" maxlength="8">
+                            <input type="text" formControlName="rua" class="campo" id="rua" placeholder="rua">
+                            <input type="text" formControlName="bairro" class="campo" id="bairro" placeholder="bairro">
+                            <input type="text" class="campo" formControlName="numero" id="numero" placeholder="número">
+                            <input type="text" formControlName="cidade" class="campo" id="cidade" placeholder="cidade">
+                            <select name="estado" formControlName="estado" id="estadosBrasileiros" class="campo" placeholder="estado">
+                                <option *ngFor="let estado of estados" [value]="estado.uf">{{estado.nome}}</option>
+                            </select>
+                    </form>
+                </div>
+            </div>
+        </div>
 
     </main>
 

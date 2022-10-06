@@ -18,13 +18,12 @@ export class ApiService {
         return this.http.put(`${baseUrl}/${id}`, data);
     }
     
-    delete(): Observable<any> {
-        return this.http.delete(`${baseUrl}`);
+    delete(id : String){
+        console.log(id);
+        return this.http.delete(`${baseUrl}${id}`);
     }
 
     post(usuario : Usuario) {
-        // console.log(data);
-        // return this.http.post<Object>(`${baseUrl}/crud/post`, );
         return this.http.post(`${baseUrl}`, usuario);
     }
 
