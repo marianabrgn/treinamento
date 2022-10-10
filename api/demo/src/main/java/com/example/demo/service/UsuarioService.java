@@ -18,6 +18,10 @@ public class UsuarioService {
     }
 
     public String salvarDados(UsuarioDados data){
+        // if (data.getCpf() != null){
+        //     return usuarioRepository.salvarDados(data);
+        // }
+        // return null;
         return usuarioRepository.salvarDados(data);
     }
 
