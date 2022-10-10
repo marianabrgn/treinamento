@@ -4,7 +4,6 @@ import { FormGroup, FormControl } from "@angular/forms";
 import { ConfigService } from 'src/services/cep.service';
 import { Endereco } from 'src/models/endereco.module';
 import { ApiService } from 'src/services/api.service';
-import { ThisReceiver } from '@angular/compiler';
 
 @Component({
   selector: 'app-usuario',
@@ -54,7 +53,6 @@ export class UsuarioComponent implements OnInit {
   ngOnInit(): void {
     this.mapearFormulario(new Usuario, new Endereco);
     this.atualizarTela();
-
   }
 
   atualizarTela(){
@@ -102,11 +100,7 @@ export class UsuarioComponent implements OnInit {
         console.log(response);
         this.mapearFormulario(this.form.value, response);
       });
-    } //else if (formulario === "mapearDadosEditados") {
-    //   this.cep.listarDadosEndereco(this.form.value.cep).subscribe(response => {
-    //     this.mapearDadosEditados(this.form.value, response);
-    //   });
-    // }
+    }
   }
 
   preencherTabela() {
@@ -117,6 +111,13 @@ export class UsuarioComponent implements OnInit {
 
   recebeDados() {
     let validar = true;
+
+    Object.keys(this.form.value).forEach( key => {
+      if (this.form.value[key] === null) {
+        validar = false;
+      }
+    });
+ 
     for (let i = 0; i < this.tabela.length; i++) {
       if (this.tabela[i].cpf === this.form.value.cpf || this.form.value.cpf == "" || this.form.value.cpf.length < 11) {
         validar = false;
@@ -128,77 +129,25 @@ export class UsuarioComponent implements OnInit {
         this.preencherTabela();
       });
     }
+
+    if (!validar) {
+      alert("Erro");
+    }
   }
-
-  // construirTabela(){
-  //     const main = document.querySelector(".main");
-  //     const tabelaContainer = document.createElement('div');
-  //     const tabela = document.createElement('table');
-  //     const linha = document.createElement('tr');
-  //     const linha1 = document.createElement('tr');
-  //     const coluna = document.createElement('td');
-  //     const coluna1 = document.createElement('td');
-  //     const coluna2 = document.createElement('td');
-  //     const coluna3 = document.createElement('td');
-  //     const botaoAtualizar = document.createElement('button');
-  //     const botaoDelete = document.createElement('button');
-
-  //     // tabelaContainer.classList.add("tabela-container");
-  //     tabela.classList.add('tabela');
-  //     linha.classList.add('linha');
-  //     // botaoAtualizar.classList.add("botao");
-  //     // botaoDelete.classList.add("botao");
-  //     coluna.innerHTML = `${this.form.value.nome}`;
-  //     coluna1.innerHTML = `${this.form.value.email}`;
-  //     coluna2.innerHTML = `${this.form.value.cpf}`;
-  //     coluna3.innerHTML = `${this.form.value.cep}`;
-  //     botaoAtualizar.textContent = `Atualizar`;
-  //     botaoDelete.textContent = `Deletar`;
-
-  //     main?.appendChild(tabelaContainer);
-  //     tabelaContainer?.appendChild(tabela);
-  //     tabela?.appendChild(linha);
-  //     linha?.appendChild(coluna);
-  //     linha?.appendChild(coluna1);
-  //     tabela?.appendChild(linha1);
-  //     linha1?.appendChild(coluna2);
-  //     linha1?.appendChild(coluna3);
-  //     tabelaContainer?.appendChild(botaoAtualizar);
-  //     tabelaContainer?.appendChild(botaoDelete);
-
-  //     botaoAtualizar?.addEventListener('click', () => { this.atualizarDadosCadastrados("atualizar"); });
-  //     botaoDelete?.addEventListener('click', () => { this.deletarDadosCadastrados("deletar"); } );
-
-  // }
-
-  // deletarTabela(){
-  //   const tabelaContainer = document.querySelector(".tabela-container");
-  //   tabelaContainer?.remove();
-  // }
 
   atualizarDadosCadastrados(user: Usuario) {
     this.mapearDadosEditados(user);
     this.mostrarModal = true;
-    // this.preencherEndereco('mapearDadosEditados');
-
-    // console.log(id);
-    // console.log(this.formModal.value);
-    // this.api.getAllUsuarioDados().subscribe(response => {
-
-    //   console.log(response);
-    // }
   }
 
   deletarDadosCadastrados(id: Usuario) {
     this.api.delete(id.cpf).subscribe(response => {
       this.preencherTabela();
     });
-    // this.tabela.pop();
   }
 
   editarDados() {
     this.mostrarModal = false;
-
     this.api.update(this.formModal.value).subscribe(response => {
       this.preencherTabela();
     });
@@ -209,13 +158,3 @@ export class UsuarioComponent implements OnInit {
 
   }
 }
-
-  // this.api.delete(this.form.value.cpf).subscribe(response => {
-  //   console.log(response);
-  // });
-
-
-
-
-
-

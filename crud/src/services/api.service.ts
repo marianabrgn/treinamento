@@ -19,7 +19,6 @@ export class ApiService {
     }
     
     delete(id : String){
-        console.log(id);
         return this.http.delete(`${baseUrl}${id}`);
     }
 
