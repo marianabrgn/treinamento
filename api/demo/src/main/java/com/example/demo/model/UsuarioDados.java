@@ -1,25 +1,76 @@
 package com.example.demo.model;
 
-import javax.persistence.*;
+import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 
 @Entity
-public class UsuarioDados {
-    // @Id
-	// @GeneratedValue(strategy = GenerationType.AUTO)
+@Table(name = "dadosUsuarios")
 
-    public String nome;
-    public String cpf;
-    public String email;
-    public String telefone;
-    public String dataNascimento;
-    public String estadoCivil;
-    public String cep;
-    public String rua;
-    public String numero;
-    public String bairro;
-    public String cidade;
-    public String estado;
+public class UsuarioDados  implements Serializable {
+
+    @Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+
+    private Integer id;
+
+    @Column(length = 200)
+    private String nome;
+
+    @Column(length = 11)
+    private String cpf;
+
+    @Column(length = 100)
+    private String email;
+
+    @Column(length = 11)
+    private String telefone;
+
+    @Column(length = 8)
+    private String dataNascimento;
+
+    @Column(length = 20)
+    private String estadoCivil;
+
+    @Column(length = 8)
+    private String cep;
+
+    @Column(length = 100)
+    private String rua;
+
+    @Column(length = 4)
+    private String numero;
+
+    @Column(length = 100)
+    private String bairro;
+
+    @Column(length = 100)
+    private String cidade;
+
+    @Column(length = 2)
+    private String estado;
+
+    public UsuarioDados(Integer id, String nome, String cpf, String email, String telefone, String estado) {
+        super();
+        this.id = id;
+        this. nome = nome;
+        this.cpf = cpf;
+        this.email = email;
+        this.telefone = telefone;
+        this.estado = estado;      
+    }
+
+    public Integer getId() {
+        return id;
+    }
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getNome() {
         return nome;
@@ -93,8 +144,6 @@ public class UsuarioDados {
     public void setEstado(String estado) {
         this.estado = estado;
     }
-        
-
 }
 
 

@@ -115,12 +115,15 @@ export class UsuarioComponent implements OnInit {
     Object.keys(this.form.value).forEach( key => {
       if (this.form.value[key] === null) {
         validar = false;
+        console.log(this.form.value[key]);
+        console.log("campoErro");
       }
     });
  
     for (let i = 0; i < this.tabela.length; i++) {
       if (this.tabela[i].cpf === this.form.value.cpf || this.form.value.cpf == "" || this.form.value.cpf.length < 11) {
         validar = false;
+        console.log("errocpf")
       }
     }
 
