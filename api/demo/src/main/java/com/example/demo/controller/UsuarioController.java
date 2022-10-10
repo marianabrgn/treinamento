@@ -1,9 +1,12 @@
 package com.example.demo.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -22,14 +25,16 @@ public class UsuarioController {
 @Autowired(required = true)
     private UsuarioService usuarioService;
 
-    @RequestMapping(value="/usuarioDados", method = RequestMethod.GET)
-        public String getAllUsuarioDados(){
-            return "usuarioRepository";
+    @GetMapping()
+        public ResponseEntity <List<UsuarioDados>> getAllUsuarioDados(){
+            List<UsuarioDados> dadosTabela = usuarioService.atualizarTabela();
+            return ResponseEntity.ok().body(dadosTabela); 
         }
 
-    @PutMapping(value="/{id}") 
-        public ResponseEntity <String> update(/* @PathVariable("id") long id, @RequestBody */ ){
-            return ResponseEntity.ok().body("atualizar"); 
+    @PutMapping() 
+        public ResponseEntity <String> update(@RequestBody UsuarioDados data){
+            String response = usuarioService.editarDados(data);
+            return ResponseEntity.ok().body("{\"data\":\""+response+"\"}"); 
         }
     
     @PostMapping() 
@@ -39,15 +44,12 @@ public class UsuarioController {
         }
 
     @DeleteMapping(value="/{id}") 
-    // public ResponseEntity <String> delete(@PathVariable String id){
-    //     usuarioService.deletarDados(id);
-    //     String response = "Dados deletados";
-    //     return ResponseEntity.ok().body("{\"data\":\""+response+"\"}"); 
-    // }
-    public String delete(@PathVariable String id){
-        usuarioService.deletarDados(id);
-        return "dados deletados"; 
-    }
+        public ResponseEntity <String> delete(@PathVariable String id){
+            usuarioService.deletarDados(id);
+            String response = "Dados deletados";
+            return ResponseEntity.ok().body("{\"data\":\""+response+"\"}"); 
+        }
+
     
 }
 

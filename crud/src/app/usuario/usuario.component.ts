@@ -4,6 +4,7 @@ import { FormGroup, FormControl } from "@angular/forms";
 import { ConfigService } from 'src/services/cep.service';
 import { Endereco } from 'src/models/endereco.module';
 import { ApiService } from 'src/services/api.service';
+import { ThisReceiver } from '@angular/compiler';
 
 @Component({
   selector: 'app-usuario',
@@ -44,7 +45,7 @@ export class UsuarioComponent implements OnInit {
   form: FormGroup | any;
   formModal: FormGroup | any;
   estadosCivis = ["solteiro(a)", "casado(a)", "viúvo(a)", "divorciado(a)", "separado(a)"];
-  mostrarModal : boolean = true; 
+  mostrarModal: boolean = false;
   constructor(
     public cep: ConfigService,
     public api: ApiService
@@ -52,8 +53,16 @@ export class UsuarioComponent implements OnInit {
 
   ngOnInit(): void {
     this.mapearFormulario(new Usuario, new Endereco);
+    this.atualizarTela();
+
   }
 
+  atualizarTela(){
+    setTimeout(() => {
+      this.preencherTabela();
+      this.atualizarTela();
+    },5000)
+  }
   async mapearFormulario(user: Usuario, endereco: Endereco) {
     this.form = new FormGroup({
       nome: new FormControl(user.nome),
@@ -70,8 +79,8 @@ export class UsuarioComponent implements OnInit {
       estado: new FormControl(endereco.uf)
     })
   }
-  async editarDados(user: Usuario, endereco: Endereco) {
-    this.form = new FormGroup({
+  async mapearDadosEditados(user: Usuario) {
+    this.formModal = new FormGroup({
       nome: new FormControl(user.nome),
       cpf: new FormControl(user.cpf),
       estadoCivil: new FormControl(user.estadoCivil),
@@ -80,10 +89,10 @@ export class UsuarioComponent implements OnInit {
       telefone: new FormControl(user.telefone),
       cep: new FormControl(user.cep),
       numero: new FormControl(user.numero),
-      rua: new FormControl(endereco.logradouro),
-      bairro: new FormControl(endereco.bairro),
-      cidade: new FormControl(endereco.localidade),
-      estado: new FormControl(endereco.uf)
+      rua: new FormControl(user.rua),
+      bairro: new FormControl(user.bairro),
+      cidade: new FormControl(user.cidade),
+      estado: new FormControl(user.estado)
     })
   }
 
@@ -92,26 +101,33 @@ export class UsuarioComponent implements OnInit {
       this.cep.listarDadosEndereco(this.form.value.cep).subscribe(response => {
         console.log(response);
         this.mapearFormulario(this.form.value, response);
-        //this.${formulario}(this.form.value, response);
       });
-    } else if (formulario === "editarDados") {
-      this.cep.listarDadosEndereco(this.form.value.cep).subscribe(response => {
-        this.editarDados(this.form.value, response);
-      });
-    }
+    } //else if (formulario === "mapearDadosEditados") {
+    //   this.cep.listarDadosEndereco(this.form.value.cep).subscribe(response => {
+    //     this.mapearDadosEditados(this.form.value, response);
+    //   });
+    // }
+  }
+
+  preencherTabela() {
+    this.api.getAllUsuarioDados().subscribe(response => {
+      this.tabela = response;
+    });
   }
 
   recebeDados() {
-    //console.log(this.form.value);
-    //this.construirTabela();
-    this.tabela.push(this.form.value);
-    // this.api.getAllUsuarioDados().subscribe(response => {
-    //   console.log(response);
-    // });
+    let validar = true;
+    for (let i = 0; i < this.tabela.length; i++) {
+      if (this.tabela[i].cpf === this.form.value.cpf || this.form.value.cpf == "" || this.form.value.cpf.length < 11) {
+        validar = false;
+      }
+    }
 
-    // this.api.post(this.form.value).subscribe(response => {
-    //   console.log(response);
-    // });
+    if (validar) {
+      this.api.post(this.form.value).subscribe(response => {
+        this.preencherTabela();
+      });
+    }
   }
 
   // construirTabela(){
@@ -160,32 +176,44 @@ export class UsuarioComponent implements OnInit {
   //   tabelaContainer?.remove();
   // }
 
-  atualizarDadosCadastrados(id: String) {
-    this.editarDados(new Usuario, new Endereco);
-    this.preencherEndereco('editarDados');
+  atualizarDadosCadastrados(user: Usuario) {
+    this.mapearDadosEditados(user);
+    this.mostrarModal = true;
+    // this.preencherEndereco('mapearDadosEditados');
 
-    console.log(id);
-    console.log(this.formModal.value);
+    // console.log(id);
+    // console.log(this.formModal.value);
+    // this.api.getAllUsuarioDados().subscribe(response => {
+
+    //   console.log(response);
+    // }
   }
 
-  deletarDadosCadastrados(id: String) {
-    console.log(id);
-    this.api.delete(this.form.value.cpf).subscribe(response => {
-      console.log(response);
+  deletarDadosCadastrados(id: Usuario) {
+    this.api.delete(id.cpf).subscribe(response => {
+      this.preencherTabela();
     });
-    this.tabela.pop();
-    //this.deletarTabela();
+    // this.tabela.pop();
   }
 
+  editarDados() {
+    this.mostrarModal = false;
 
+    this.api.update(this.formModal.value).subscribe(response => {
+      this.preencherTabela();
+    });
 
-  // botaoAtualizar?.addEventListener('click', () => { this.atualizarDadosCadastrados("atualizar"); });
-  // botaoDelete?.addEventListener('click', () => { this.deletarDadosCadastrados("deletar"); } );
+  }
+  sairModal() {
+    this.mostrarModal = false;
+
+  }
+}
 
   // this.api.delete(this.form.value.cpf).subscribe(response => {
   //   console.log(response);
   // });
-}
+
 
 
 

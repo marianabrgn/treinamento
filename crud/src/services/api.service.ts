@@ -11,11 +11,11 @@ export class ApiService {
     constructor(private http: HttpClient) {  }
     
     getAllUsuarioDados() {
-        return this.http.get(`${baseUrl}`);
+        return this.http.get<Array <Usuario>>(`${baseUrl}`);
     }
 
-    update(id : any, data : any): Observable<any> {
-        return this.http.put(`${baseUrl}/${id}`, data);
+    update(id : any): Observable<any> {
+        return this.http.put(`${baseUrl}`, id);
     }
     
     delete(id : String){
