@@ -18,7 +18,7 @@ export class ApiService {
         return this.http.put(`${baseUrl}`, id);
     }
     
-    delete(id : String){
+    delete(id : Number){
         return this.http.delete(`${baseUrl}${id}`);
     }
 

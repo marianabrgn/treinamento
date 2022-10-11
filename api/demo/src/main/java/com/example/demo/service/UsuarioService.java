@@ -19,8 +19,8 @@ public class UsuarioService {
         return usuarioRepository.salvarDados(data);
     }
 
-    public String deletarDados(String data) {
-        return usuarioRepository.deletarDados(data);
+    public String deletarDados(Integer id) {
+        return usuarioRepository.deletarDados(id);
     }
 
     public String editarDados(UsuarioDados data) {

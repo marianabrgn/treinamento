@@ -113,8 +113,7 @@ export class UsuarioComponent implements OnInit {
     Object.keys(this.form.value).forEach( key => {
       if (this.form.value[key] === null) {
         validar = false;
-        console.log(this.form.value[key]);
-      }
+        }
     });
  
     for (let i = 0; i < this.tabela.length; i++) {
@@ -140,8 +139,8 @@ export class UsuarioComponent implements OnInit {
     this.mostrarModal = true;
   }
 
-  deletarDadosCadastrados(id: Usuario) {
-    this.api.delete(id.cpf).subscribe(response => {
+  deletarDadosCadastrados(user: Usuario) {
+    this.api.delete(user.id).subscribe(response => {
       this.preencherTabela();
     });
   }
@@ -155,6 +154,5 @@ export class UsuarioComponent implements OnInit {
   }
   sairModal() {
     this.mostrarModal = false;
-
   }
 }

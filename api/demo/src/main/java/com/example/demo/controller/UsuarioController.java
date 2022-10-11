@@ -43,7 +43,7 @@ public class UsuarioController {
         }
 
     @DeleteMapping(value="/{id}") 
-        public ResponseEntity <String> delete(@PathVariable String id){
+        public ResponseEntity <String> delete(@PathVariable Integer id){
             usuarioService.deletarDados(id);
             String response = "Dados deletados";
             return ResponseEntity.ok().body("{\"data\":\""+response+"\"}"); 

@@ -14,30 +14,29 @@ public class UsuarioRepository {
     public List<UsuarioDados> usuarioDados = new ArrayList <UsuarioDados>();
 
     public List<UsuarioDados> atualizarTabela(){
-        return usuarioDados;
+        return databaseRepository.findAll();
     }
     public String salvarDados(UsuarioDados data){
-        usuarioDados.add(data);
+        // usuarioDados.add(data);
+        databaseRepository.save(data);
         return "Success";
     }
-
-    public String deletarDados(String data) {
-        for(int i = 0; i < usuarioDados.size(); i++){
-            if(usuarioDados.get(i).getCpf().equals(data)){
-                usuarioDados.remove(i);
-            }
-        }      
+    public String deletarDados(Integer id) {
+        databaseRepository.deleteById(id);
+        // for(int i = 0; i < usuarioDados.size(); i++){
+        //     if(usuarioDados.get(i).getCpf().equals(data)){
+        //         usuarioDados.remove(i);
+        //     }
+            
        return "Data deleted";
     }
-
     public String editarDados(UsuarioDados data) {
-        for(int i = 0; i < usuarioDados.size(); i++){
-            if(usuarioDados.get(i).getCpf().equals(data.getCpf())){
-                usuarioDados.set(i, data);
-            }
-        }        
+        // databaseRepository
+        // for(int i = 0; i < usuarioDados.size(); i++){
+        //     if(usuarioDados.get(i).getCpf().equals(data.getCpf())){
+        //         usuarioDados.set(i, data);
+        //     }
+        // }        
         return "Success editing";
     }
-
-
 }

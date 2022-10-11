@@ -11,4 +11,5 @@ export class Usuario {
     bairro : String | any;
     cidade : String | any;
     estado : String | any;
+    id!: Number;
 }
