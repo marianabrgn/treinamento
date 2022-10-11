@@ -8,7 +8,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
 @Entity
 @Table(name = "dadosUsuarios")
 
@@ -55,14 +54,22 @@ public class UsuarioDados  implements Serializable {
     @Column(length = 2)
     private String estado;
 
-    public UsuarioDados(Integer id, String nome, String cpf, String email, String telefone, String estado) {
+    public UsuarioDados(Integer id, String nome, String cpf, String email, String telefone, String dataNascimento, 
+    String estadoCivil, String cep, String rua, String numero, String bairro, String cidade, String estado) {
         super();
         this.id = id;
         this. nome = nome;
         this.cpf = cpf;
         this.email = email;
         this.telefone = telefone;
-        this.estado = estado;      
+        this.dataNascimento = dataNascimento;
+        this.estadoCivil = estadoCivil;
+        this.cep = cep;
+        this.rua = rua;
+        this.numero = numero;
+        this.bairro = bairro;
+        this.cidade = cidade;
+        this.estado = estado;  
     }
 
     public Integer getId() {

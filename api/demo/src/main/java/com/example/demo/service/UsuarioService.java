@@ -1,8 +1,6 @@
 package com.example.demo.service;
 
-
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.demo.model.UsuarioDados;
@@ -18,10 +16,6 @@ public class UsuarioService {
     }
 
     public String salvarDados(UsuarioDados data){
-        // if (data.getCpf() != null){
-        //     return usuarioRepository.salvarDados(data);
-        // }
-        // return null;
         return usuarioRepository.salvarDados(data);
     }
 
@@ -32,5 +26,4 @@ public class UsuarioService {
     public String editarDados(UsuarioDados data) {
         return usuarioRepository.editarDados(data);
     }
-
 }

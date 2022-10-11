@@ -94,13 +94,11 @@ export class UsuarioComponent implements OnInit {
     })
   }
 
-  preencherEndereco(formulario: String) {
-    if (formulario === "mapearFormulario") {
-      this.cep.listarDadosEndereco(this.form.value.cep).subscribe(response => {
+  preencherEndereco() {
+       this.cep.listarDadosEndereco(this.form.value.cep).subscribe(response => {
         console.log(response);
         this.mapearFormulario(this.form.value, response);
       });
-    }
   }
 
   preencherTabela() {
@@ -116,12 +114,11 @@ export class UsuarioComponent implements OnInit {
       if (this.form.value[key] === null) {
         validar = false;
         console.log(this.form.value[key]);
-        console.log("campoErro");
       }
     });
  
     for (let i = 0; i < this.tabela.length; i++) {
-      if (this.tabela[i].cpf === this.form.value.cpf || this.form.value.cpf == "" || this.form.value.cpf.length < 11) {
+      if (this.tabela[i].cpf === this.form.value.cpf || this.form.value.cpf.length < 11) {
         validar = false;
         console.log("errocpf")
       }

@@ -2,14 +2,11 @@ package com.example.demo.repository;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.example.demo.model.UsuarioDados;
 
-
 @Repository
-
 public class UsuarioRepository {
     @Autowired
     DatabaseRepository databaseRepository;
@@ -36,7 +33,6 @@ public class UsuarioRepository {
     public String editarDados(UsuarioDados data) {
         for(int i = 0; i < usuarioDados.size(); i++){
             if(usuarioDados.get(i).getCpf().equals(data.getCpf())){
-                System.out.println("aqui está chegando");
                 usuarioDados.set(i, data);
             }
         }        
