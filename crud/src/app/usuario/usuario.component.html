@@ -1,3 +1,4 @@
+
 <main class="main">
     <h1>Formulário</h1>
     <form [formGroup] = "form" ngNativeValidate>
@@ -89,7 +90,7 @@
             <input type="date" formControlName="dataNascimento" class="campo" name="" id="data-nascimento" placeholder="data de nascimento">
             <input type="tel" formControlName="telefone" class="campo" name="" id="telefone" placeholder="telefone" maxlength="11">
             <select formControlName="estadoCivil" name="estado-civil" id="" >
-                <option  *ngFor="let estadoCivil of estadosCivis">{{estadoCivil}}</option>
+                <option *ngFor="let estadoCivil of estadosCivis">{{estadoCivil}}</option>
             </select>
             <input type="text" formControlName="cep" (blur)="preencherEndereco()" class="campo" id="cep" placeholder="CEP" maxlength="8">
             <input type="text" formControlName="rua" class="campo" id="rua" placeholder="rua">
@@ -100,8 +101,9 @@
                 <option *ngFor="let estado of estados" [value]="estado.uf">{{estado.nome}}</option>
             </select>
         </div>
-        <input type="submit" class="campo" id="submitAtualizar" value="Enviar" (click) = "editarDados()">
+        <input type="submit" class="campo" id="submitAtualizar" value="Enviar" (click) = "editarDados()"> 
         <input type="submit" class="campo" id="submitAtualizar" value="Cancelar" (click) = "sairModal()">
+        <!-- (click) = "editarDados()" -->
     </form>
 
 

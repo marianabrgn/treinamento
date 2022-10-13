@@ -14,8 +14,8 @@ export class ApiService {
         return this.http.get<Array <Usuario>>(`${baseUrl}`);
     }
 
-    update(id : any): Observable<any> {
-        return this.http.put(`${baseUrl}`, id);
+    update(id : Number, body: Usuario): Observable<any> {
+        return this.http.put(`${baseUrl}${id}`, body);
     }
     
     delete(id : Number){

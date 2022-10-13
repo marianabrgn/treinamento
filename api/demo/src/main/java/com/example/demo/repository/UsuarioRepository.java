@@ -27,16 +27,35 @@ public class UsuarioRepository {
         //     if(usuarioDados.get(i).getCpf().equals(data)){
         //         usuarioDados.remove(i);
         //     }
-            
        return "Data deleted";
     }
-    public String editarDados(UsuarioDados data) {
-        // databaseRepository
+    public String editarDados(Integer id, UsuarioDados data) {
+        
+        UsuarioDados dadosBD = databaseRepository.findById(id).get();
+
+        dadosBD.setNome(data.getNome());
+        dadosBD.setEmail(data.getEmail());
+        dadosBD.setTelefone(data.getTelefone());
+
+        dadosBD.setDataNascimento(data.getDataNascimento());
+        dadosBD.setEstadoCivil(data.getEstadoCivil());
+        dadosBD.setCep(data.getCep());
+        dadosBD.setRua(data.getRua());
+        dadosBD.setBairro(data.getBairro());
+        dadosBD.setNumero(data.getNumero());
+        dadosBD.setCidade(data.getCidade());
+        dadosBD.setEstado(data.getEstado());
+
+
+        databaseRepository.save(dadosBD);
+        
+
         // for(int i = 0; i < usuarioDados.size(); i++){
         //     if(usuarioDados.get(i).getCpf().equals(data.getCpf())){
         //         usuarioDados.set(i, data);
         //     }
-        // }        
+        // }
+        System.out.println(id);
         return "Success editing";
     }
 }

@@ -41,10 +41,13 @@ export class UsuarioComponent implements OnInit {
   { uf: 'SE', nome: 'Sergipe' },
   { uf: 'TO', nome: 'Tocantins' }];
   tabela: Array<Usuario> = [];
+
   form: FormGroup | any;
   formModal: FormGroup | any;
   estadosCivis = ["solteiro(a)", "casado(a)", "viúvo(a)", "divorciado(a)", "separado(a)"];
   mostrarModal: boolean = false;
+  idAtualizacao: Number | any;
+
   constructor(
     public cep: ConfigService,
     public api: ApiService
@@ -95,10 +98,9 @@ export class UsuarioComponent implements OnInit {
   }
 
   preencherEndereco() {
-       this.cep.listarDadosEndereco(this.form.value.cep).subscribe(response => {
-        console.log(response);
-        this.mapearFormulario(this.form.value, response);
-      });
+      this.cep.listarDadosEndereco(this.form.value.cep).subscribe(response => {
+      this.mapearFormulario(this.form.value, response);
+    });
   }
 
   preencherTabela() {
@@ -119,7 +121,6 @@ export class UsuarioComponent implements OnInit {
     for (let i = 0; i < this.tabela.length; i++) {
       if (this.tabela[i].cpf === this.form.value.cpf || this.form.value.cpf.length < 11) {
         validar = false;
-        console.log("errocpf")
       }
     }
 
@@ -135,6 +136,7 @@ export class UsuarioComponent implements OnInit {
   }
 
   atualizarDadosCadastrados(user: Usuario) {
+    this.idAtualizacao = user.id;
     this.mapearDadosEditados(user);
     this.mostrarModal = true;
   }
@@ -147,11 +149,11 @@ export class UsuarioComponent implements OnInit {
 
   editarDados() {
     this.mostrarModal = false;
-    this.api.update(this.formModal.value).subscribe(response => {
+    this.api.update(this.idAtualizacao , this.formModal.value).subscribe(response => {
       this.preencherTabela();
     });
-
   }
+
   sairModal() {
     this.mostrarModal = false;
   }

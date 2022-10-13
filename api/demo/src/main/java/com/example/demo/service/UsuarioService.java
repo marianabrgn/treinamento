@@ -23,7 +23,7 @@ public class UsuarioService {
         return usuarioRepository.deletarDados(id);
     }
 
-    public String editarDados(UsuarioDados data) {
-        return usuarioRepository.editarDados(data);
+    public String editarDados(Integer id, UsuarioDados data) {
+        return usuarioRepository.editarDados(id, data);
     }
 }

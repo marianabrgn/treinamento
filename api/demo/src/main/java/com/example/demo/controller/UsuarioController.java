@@ -30,9 +30,9 @@ public class UsuarioController {
             return ResponseEntity.ok().body(dadosTabela); 
         }
 
-    @PutMapping() 
-        public ResponseEntity <String> update(@RequestBody UsuarioDados data){
-            String response = usuarioService.editarDados(data);
+    @PutMapping(value="/{id}") 
+        public ResponseEntity <String> update( @PathVariable Integer id, @RequestBody UsuarioDados data){
+            String response = usuarioService.editarDados(id, data);
             return ResponseEntity.ok().body("{\"data\":\""+response+"\"}"); 
         }
     
